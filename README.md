@@ -14,13 +14,13 @@ This project provides the basic Financial, Planning & Analysis functions in Pyth
 - Pasting back into Excel
 - Providing a basis to use all of Python's data science tools
 
-Our goal is to make an easier introduction into Python for FP&A, investment banking, hedge fund and private equity professionals.  Python, and especially Pandas, can be daunting for uses in FP&A, but does provide advantages:
+The goal is to make an easier introduction into Python for finance analysts who do the work of collecting and analyzing data.  Python, and especially Pandas, can be daunting for uses in FP&A, but does provide advantages:
 
 - Can handle large data and associated calculations
-- No incorrect links
-- API connections to almost every database and software
+- No incorrect links or changing underlying data
+- API connections to almost every type of database and software
 - Access to a greater amount of data science tools (statistical, AI)
 - Access to high-end charting and visualization tools
 - And all for *free*
 
-While overpowered for most FP&A functions (Excel is a great tool), this package looks to leverage that power to address the challenges FP&A such as being able to keep all the verions of your data in one place, handling large data and data structures that's getting to big for excel, and not worrying about link problems.
+While overpowered for most FP&A functions (Excel is a great tool), this package looks to leverage that power to address the challenges of FP&A activities.
