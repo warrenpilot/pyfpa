@@ -4,7 +4,7 @@ This project provides the basic Financial, Planning & Analysis functions in Pyth
 
 - Collecting data from Excel files into Pandas Dataframes
 - Ability to map custom budget or actual reports to capture data and dimensions
-- Creating a repository for financial, operational, sales or any kind of data.  A Golden Source for actuals, budgets, forecasts, sales reports, web statistics, stock data ...anything you can think of!
+- Creating a data cube repository for financial, operational, sales or any kind of data.  A Golden Source for actuals, budgets, forecasts, sales reports, web statistics, stock data ...anything you can think of!
 - Source and version control to keep track of which files are the basis for data
 - Easy slicing and dicing of data based on dimensions you define
 - Changing table data into record data for pivot tables
