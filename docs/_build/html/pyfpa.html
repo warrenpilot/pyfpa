@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyfpa package &#8212; pyfpa 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="setup module" href="setup.html" />
+    <link rel="prev" title="pyfpa_pkg" href="modules.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>pyfpa 0.0.1 documentation</span></a></h1>
+        <h2 class="heading"><span>pyfpa package</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="modules.html">pyfpa_pkg</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="setup.html">setup module</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content" role="main">
+        
+        
+  <div class="section" id="pyfpa-package">
+<h1>pyfpa package<a class="headerlink" href="#pyfpa-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="pyfpa-cli-module">
+<h2>pyfpa.cli module<a class="headerlink" href="#pyfpa-cli-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="pyfpa-pyfpa-module">
+<h2>pyfpa.pyfpa module<a class="headerlink" href="#pyfpa-pyfpa-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyfpa">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyfpa" title="Permalink to this headline">¶</a></h2>
+<p>Project for Financial Planning and Analysis</p>
+<p>Written by Erik Warren
+Written for Rebecca, Ethan and Clare
+October 2020
+version: 0.0.1 beta</p>
+<dl class="py class">
+<dt id="pyfpa.fpa">
+<em class="property">class </em><code class="sig-prename descclassname">pyfpa.</code><code class="sig-name descname">fpa</code><span class="sig-paren">(</span><em class="sig-param">df=Empty DataFrame Columns: [] Index: []</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="pyfpa.fpa.add_block_to_data">
+<code class="sig-name descname">add_block_to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.add_block_to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.add_block_to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the block data object, arranges the index and adds it to the data object.  Even if the indexes don’t
+match, this will fill in the missing pieces.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.add_dimensions">
+<code class="sig-name descname">add_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_dimensions</span></em>, <em class="sig-param"><span class="n">dim_values_to_add</span></em>, <em class="sig-param"><span class="n">col_num</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.add_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.add_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a dimension to the index with a new name, values and where to place it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_dimensions</strong> – Name of the new dimension or dimensions.  String value or list i.e. ‘Department’ or
+[‘Department’, ‘Region’]</p></li>
+<li><p><strong>dim_values_to_add</strong> – Values of the new dimension or dimensions.  String value or list i.e. ‘Sales’ or
+[‘Sales’, ‘EMEA’]</p></li>
+<li><p><strong>col_num</strong> – Where in the index to place the new dimension.  1 indicates 1 column from the left.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘slice’, ‘consolidation’, ‘function_result’, ‘data’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data_obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.column_slice">
+<code class="sig-name descname">column_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_values</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">col_range</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">col_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em>, <em class="sig-param"><span class="n">append_to</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.column_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.column_slice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.combine_dimensions">
+<code class="sig-name descname">combine_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">combine_order</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.combine_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.combine_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.consol_dimension">
+<code class="sig-name descname">consol_dimension</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">'Data_Block'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.consol_dimension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.consol_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Consolidates a data object on a certain dimension of the data object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> – Dimension to consolidate on.  I.e. ‘Department’ or ‘SalesPerson’.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect. Default: ‘data’.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.consolidation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.dim_to_date">
+<code class="sig-name descname">dim_to_date</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.dim_to_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.dim_to_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to change a dimension or column from object to datetime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> – String value of which dimension contains the item you want to change.  I.e. ‘Region’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.drop_dimension">
+<code class="sig-name descname">drop_dimension</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimension_drop</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.drop_dimension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.drop_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a dimension from the index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimension_drop</strong> – Dimension to drop.  I.e. ‘Department’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyfpa.fpa.fpa_help">
+<code class="sig-name descname">fpa_help</code><em class="property"> = 'pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&amp;A Professionals.'</em><a class="headerlink" href="#pyfpa.fpa.fpa_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.get_block_info">
+<code class="sig-name descname">get_block_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">db_id</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.get_block_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.get_block_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the meta information from a data block.  Just plug in the data block number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>db_id</strong> – Interger of the data block. I.e. x.get_block_info(49593949)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Meta information for Data_Block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.get_duplicates">
+<code class="sig-name descname">get_duplicates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">based_on</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.get_duplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.get_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves repetitive records based on the index.  Can be filtered down by dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>based_on</strong> – String or list object of dimensions to be used.  If blank it will all dimensions.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘data’. Available - ‘data’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.function_result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyfpa.fpa.help_add_dimensions">
+<code class="sig-name descname">help_add_dimensions</code><em class="property"> = &quot;Add dimensions and values with lists ['???',...]&quot;</em><a class="headerlink" href="#pyfpa.fpa.help_add_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyfpa.fpa.help_import_custom_xl">
+<code class="sig-name descname">help_import_custom_xl</code><em class="property"> = 'Import Excel using custom mapping for table and dimensions.  Enter most items as lists.'</em><a class="headerlink" href="#pyfpa.fpa.help_import_custom_xl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyfpa.fpa.help_import_xl">
+<code class="sig-name descname">help_import_xl</code><em class="property"> = 'Import Excel or DataFrame to .block.  cols_to_index are columns for index     which can be int or list for Excel. For DataFrame, string or list of string column names.'</em><a class="headerlink" href="#pyfpa.fpa.help_import_xl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyfpa.fpa.help_merge_dim_from_accts">
+<code class="sig-name descname">help_merge_dim_from_accts</code><em class="property"> = 'One-to-One add of a dimension from an accounts based on existing dimension'</em><a class="headerlink" href="#pyfpa.fpa.help_merge_dim_from_accts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyfpa.fpa.help_merge_dim_from_xl">
+<code class="sig-name descname">help_merge_dim_from_xl</code><em class="property"> = 'One-to-One add of a dimension from an excel list based on existing dimension'</em><a class="headerlink" href="#pyfpa.fpa.help_merge_dim_from_xl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.import_accts_xl">
+<code class="sig-name descname">import_accts_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_name</span><span class="o">=</span><span class="default_value">'nval'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_accts_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_accts_xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import a dataframe such as a chart of accounts or sales dimensions for adding to data objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_path</strong> – Path to Excel file.</p></li>
+<li><p><strong>ws_name</strong> – Name or index number of the worksheet.  i.e. ‘Accounts’ or 2.</p></li>
+<li><p><strong>dim_name</strong> – Identifier for the group used when retrieving it.  See merge_dim_from_accts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.accounts</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.import_custom_xl">
+<code class="sig-name descname">import_custom_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_values</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fill_index_na</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_custom_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_custom_xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom import with mapping for data table and dimensions from Excel worksheet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_path</strong> – Path to the Excel File.</p></li>
+<li><p><strong>ws_name</strong> – Name or index number of the worksheet.  i.e. ‘Accounts’ or 2.</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_values</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.import_xl">
+<code class="sig-name descname">import_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">cols_to_index</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import a table from a worksheet in a Excel File or an existing pandas DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> – path to file OR a pandas DataFrame</p></li>
+<li><p><strong>ws_name</strong> – worksheet name or index such as 0 or 2</p></li>
+<li><p><strong>cols_to_index</strong> – columns to put into index either a number or a list i.e. [0, 1, 2]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.import_xl_directories">
+<code class="sig-name descname">import_xl_directories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dir_path</span></em>, <em class="sig-param"><span class="n">xl_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fill_index_na</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_xl_directories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_xl_directories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports dimensions and table from a worksheet from all the Excel files (with or without identifiers) from a series of directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – Path to the root directory containing the directories which contain the files.</p></li>
+<li><p><strong>xl_id</strong> – String used to filter files to extract data, i.e. if file name is “Budget v3.xlsx” you could say ‘v3.xlsx’</p></li>
+<li><p><strong>ws_name</strong> – Worksheet to read.  Input as string i.e. ‘Sales’ or index.  Zero is default.</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.import_xl_directory">
+<code class="sig-name descname">import_xl_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dir_path</span></em>, <em class="sig-param"><span class="n">xl_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fill_index_na</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_xl_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_xl_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports dimensions and table from a worksheet from all the Excel files (with or without identifiers) from a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – Path to the directory containing the files</p></li>
+<li><p><strong>xl_id</strong> – String used to filter files to extract data, i.e. if file name is “Budget v3.xlsx” you could say ‘v3.xlsx’</p></li>
+<li><p><strong>ws_name</strong> – Worksheet to read.  Input as string i.e. ‘Sales’ or index.  Zero is default.</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.import_xl_sheets">
+<code class="sig-name descname">import_xl_sheets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span></em>, <em class="sig-param"><span class="n">wb_sheets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fill_index_na</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_xl_sheets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_xl_sheets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports all the tables from worksheets within an Excel file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_path</strong> – Path to the file</p></li>
+<li><p><strong>wb_sheets</strong> – Worksheets to read.  Input as list i.e. [‘Sales’, ‘Operations’]</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.keyword_replace">
+<code class="sig-name descname">keyword_replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_words</span></em>, <em class="sig-param"><span class="n">replace_words</span></em>, <em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.keyword_replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.keyword_replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace a word or words in the index.  For example, if you wanted to replace [‘Payroll’, ‘East’] with
+[‘Salaries &amp; Wages’, ‘Northeast’].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_words</strong> – String or list of word(s) to be replace. I.e. ‘Software’ or [‘Payroll’, ‘East’].</p></li>
+<li><p><strong>replace_words</strong> – String or list of word(s) to insert. I.e. ‘3rd Party Code’ or [‘Salaries &amp; Wages’, ‘Northeast’].</p></li>
+<li><p><strong>dims</strong> – String or list of specific dimensions to effect.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘data’. Available - ‘data’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data_obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.keyword_slice">
+<code class="sig-name descname">keyword_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keywords</span></em>, <em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.keyword_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.keyword_slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slice data based on string fragment.  Function will search the index &amp; data and return any rows with the
+search string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keywords</strong> – String object of which to search.  I.e. ‘Rent’, ‘LLC’, ‘Smith’</p></li>
+<li><p><strong>dims</strong> – String or list object of specific dimensions to search. Blank will search all dimensions &amp; data.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘data’. Available - ‘data’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.slice</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.load_project">
+<code class="sig-name descname">load_project</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.load_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.load_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports the project by filling the ‘data’, ‘meta_block’ and ‘accounts’ data objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path_name</strong> – Path to directory for normal save or to the json file. I.e. for json file
+‘C:/Budgets/Budgets v1.json’ or ‘C:/Budgets/’ for normal load.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>project</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.make_pivot_table">
+<code class="sig-name descname">make_pivot_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_col</span></em>, <em class="sig-param"><span class="n">index_names</span></em>, <em class="sig-param"><span class="n">col_names</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em>, <em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">'sum'</span></em>, <em class="sig-param"><span class="n">totals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">total_names</span><span class="o">=</span><span class="default_value">'Total'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.make_pivot_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.make_pivot_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.make_records">
+<code class="sig-name descname">make_records</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.make_records"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.make_records" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the data object to a records format rather than a table.  Works bes on single level columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_obj</strong> – Which data object you want o effect. Default: ‘data’.  Available - ‘block’, ‘data’, ‘slice’,
+‘consolidation’, ‘function_result’, ‘variance’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.make_records_for_pivot">
+<code class="sig-name descname">make_records_for_pivot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.make_records_for_pivot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.make_records_for_pivot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the data object to a records format so it can be pasted into Excel in a
+pivot table friendly format.  Only works if the column index is a single level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_obj</strong> – Which data object you want o effect. Default: ‘data’.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.merge_dim_from_accts">
+<code class="sig-name descname">merge_dim_from_accts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_set</span></em>, <em class="sig-param"><span class="n">base_dim</span></em>, <em class="sig-param"><span class="n">new_dims</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.merge_dim_from_accts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.merge_dim_from_accts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add dimension based on account data object. If you have a chart of accounts you could add the account number
+to the Line Item if you have it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_set</strong> – Section of ‘accounts’ data object to take new dimensions.</p></li>
+<li><p><strong>base_dim</strong> – Existing dimension in the index on which to merge the new dimension</p></li>
+<li><p><strong>new_dims</strong> – Column from the accounts data object table to add to the dataframe</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data_object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.merge_dim_from_xl">
+<code class="sig-name descname">merge_dim_from_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">ws_name</span></em>, <em class="sig-param"><span class="n">base_dim</span></em>, <em class="sig-param"><span class="n">new_dims</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.merge_dim_from_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.merge_dim_from_xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add dimension based on an table from an Excel file. If you have a chart of accounts you could add the account number
+to the Line Item if you have it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_dim</strong> – Existing dimension in the index on which to merge the new dimension</p></li>
+<li><p><strong>new_dims</strong> – Column from the accounts data object table to add to the dataframe</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data_object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.move_col_to_dims">
+<code class="sig-name descname">move_col_to_dims</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dims</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.move_col_to_dims"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.move_col_to_dims" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a dimension from the columns in the data to the index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dims</strong> – Dimension to drop.  I.e. ‘Department’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.move_dims_to_col">
+<code class="sig-name descname">move_dims_to_col</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dims</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.move_dims_to_col"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.move_dims_to_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a dimension from the index to a column in the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dims</strong> – Dimension to drop.  I.e. ‘Department’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.multiply_dim">
+<code class="sig-name descname">multiply_dim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_name</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calc_name</span><span class="o">=</span><span class="default_value">'New Item'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'slice'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.multiply_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.multiply_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply two or more dimension items.  For example, multiply units x price x discount with
+x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]
+:param dim_name: String object of dimension name.  I.e. ‘Basis’.
+:param dim_vals: List object of dimension items to multiply.  I.e. [‘Units’, ‘Price’, ‘Discount’]
+:param calc_name: String object of new dimension item name.  I.e. ‘Total_Revenue’
+:param data_obj: Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’
+:return: self.function_result</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.remove_duplicates">
+<code class="sig-name descname">remove_duplicates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">based_on</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_item</span><span class="o">=</span><span class="default_value">'last'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.remove_duplicates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.remove_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes repetitive records based on the index.  Can be filtered down by dimensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>based_on</strong> – String or list object of dimensions to be used.  If blank it will all dimensions.</p></li>
+<li><p><strong>keep_item</strong> – String object of which records to keep. I.e. either ‘last’ or ‘first’.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘data’. Available - ‘data’, ‘block’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data object without duplicate records</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.rename_dim_item">
+<code class="sig-name descname">rename_dim_item</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim</span></em>, <em class="sig-param"><span class="n">old</span></em>, <em class="sig-param"><span class="n">new</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.rename_dim_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.rename_dim_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give a new name to an existing name in a dimension.  I.e. if ‘USA” is to be changed to ‘North America’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> – String value of which dimension contains the item you want to change.  I.e. ‘Region’</p></li>
+<li><p><strong>old</strong> – String value of the item to be changed.  I.e. ‘USA’</p></li>
+<li><p><strong>new</strong> – String value of the new name of the item.  I.e. ‘North America’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.rename_dimensions">
+<code class="sig-name descname">rename_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_list</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.rename_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.rename_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give new names to one or all of the dimension names.  I.e. if dimensions are [‘Department’, ‘Region’, ‘Data_Block’]
+it can be changed to [‘Department’, ‘Geography’, ‘Data_Block’]
+:param dim_list: List of all the dimension names with the new names included
+:param data_obj: Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,</p>
+<blockquote>
+<div><p>‘function_result’, ‘variance’</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>data object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.reorder_dimensions">
+<code class="sig-name descname">reorder_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_order</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.reorder_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.reorder_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the order of the dimensions of the index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_order</strong> – List input i.e. [‘Department’, ‘Region’, ‘Data_Block’, ‘Line Item’]</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data_obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.reorder_index_dim">
+<code class="sig-name descname">reorder_index_dim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_order</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">axis_target</span><span class="o">=</span><span class="default_value">'index'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.reorder_index_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.reorder_index_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the order of the item within an index.  I.e. if existing the Line Item dimension has an existing order of
+[‘Office Supplies’, ‘Rent’, ‘Payroll’], change it to [‘Payroll’, ‘Rent’, ‘Office Supplies’].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_order</strong> – List values of the new order.  Should contain all the values.</p>
+</dd>
+</dl>
+<p>I.e. [‘Payroll’, ‘Rent’, ‘Office Supplies’]
+:param dim: Dimension to be reordered
+:param axis_target: Index or the columns.  I.e. ‘index’ or ‘columns’
+:param data_obj: Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,</p>
+<blockquote>
+<div><p>‘function_result’, ‘variance’</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.save_project">
+<code class="sig-name descname">save_project</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prj_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.save_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.save_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a project as either a directory with pickle files or as a json object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prj_name</strong> – String object for name of the project.  Will make a directory in path_name if it doesn’t exist.</p></li>
+<li><p><strong>path_name</strong> – Path to directory or a full file path for json.  I.e. for json file
+‘C:/Budgets/Budgets v1.json’ or ‘C:/Budgets/’ for normal save</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.slice_data">
+<code class="sig-name descname">slice_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_values</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">col_range</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">col_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em>, <em class="sig-param"><span class="n">append_to</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.slice_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.slice_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slice and dice data based on dimensions for the index and ranges or lists for the columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dims</strong> – List object (even for one item) of dimensions.  I.e. [‘Department’, ‘Line Item’]</p></li>
+<li><p><strong>dim_values</strong> – List and nested list object (even for one item) of items on which to slice.
+I.e. [‘Operations’, [‘Network Costs’, ‘Payroll’]]</p></li>
+<li><p><strong>col_range</strong> – List object of start and end point of range. I.e. [‘2022-06-30’, ‘2022-12-31’] for datetime</p></li>
+<li><p><strong>col_list</strong> – List object columns. I.e. [‘2022-06-30’, ‘2022-09-30’, ‘2022-12-31’] for datetime</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘data’, ‘slice’</p></li>
+<li><p><strong>append_to</strong> – Add data to existing slice data object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.slice</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.slice_to_project">
+<code class="sig-name descname">slice_to_project</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.slice_to_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.slice_to_project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.subtract_dim">
+<code class="sig-name descname">subtract_dim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_name</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calc_name</span><span class="o">=</span><span class="default_value">'New Item'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'slice'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.subtract_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.subtract_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtract two or more dimension items.  For example, ‘Total_Revenue’ - ‘COGS’ with
+FPA_OBJECT.subtract_dim(‘IS_Category’, [‘Total_Revenue’, ‘COGS’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_name</strong> – String object of dimension name.  I.e. ‘IS_Category’.</p></li>
+<li><p><strong>dim_vals</strong> – List object of dimension items to multiply.  I.e. [‘Total_Revenue’, ‘COGS’]</p></li>
+<li><p><strong>calc_name</strong> – String object of new dimension item name.  I.e. ‘Gross Profit’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.function_result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.sum_dim">
+<code class="sig-name descname">sum_dim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_name</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calc_name</span><span class="o">=</span><span class="default_value">'New Item'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'slice'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.sum_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.sum_dim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add two or more dimension items.  For example, ‘Rent’ + ‘Office Supplies’ with
+FPA_OBJECT.sum_dim(‘Line Item’, [‘Rent’, ‘Office Supplies’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_name</strong> – String object of dimension name.  I.e. ‘Line Item’.</p></li>
+<li><p><strong>dim_vals</strong> – List object of dimension items to multiply.  I.e. [‘Rent’, ‘Office Supplies’]</p></li>
+<li><p><strong>calc_name</strong> – String object of new dimension item name.  I.e. ‘Office Expense’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.function_result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.time_slice">
+<code class="sig-name descname">time_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start_dt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">end_dt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_period</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">col_period</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.time_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.time_slice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.update_custom_xl">
+<code class="sig-name descname">update_custom_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.update_custom_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.update_custom_xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom update of existing data with mapping for data and dimensions from Excel Worksheet.  It will
+update a section of ‘data’, which has an identical dimension structure (excluding ‘Data_Block’ with new data.
+The new block’s meta information will be referenced in the original blocks data to show history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_path</strong> – Path to the Excel File.</p></li>
+<li><p><strong>ws_name</strong> – Name or index number of the worksheet.  i.e. ‘Accounts’ or 2.</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.update_xl_directories">
+<code class="sig-name descname">update_xl_directories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dir_path</span></em>, <em class="sig-param"><span class="n">xl_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.update_xl_directories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.update_xl_directories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports dimensions and table from a worksheet from all the Excel files (with or without identifiers) from a series of directories. It will
+update a section of ‘data’, which has an identical dimension structure (excluding ‘Data_Block’ with new data.
+The new block’s meta information will be referenced in the original blocks data to show history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – Path to the root directory containing the directories which contain the files.</p></li>
+<li><p><strong>xl_id</strong> – String used to filter files to extract data, i.e. if file name is “Budget v3.xlsx” you could say ‘v3.xlsx’</p></li>
+<li><p><strong>ws_name</strong> – Worksheet to read.  Input as string i.e. ‘Sales’ or index.  Zero is default.</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.update_xl_directory">
+<code class="sig-name descname">update_xl_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dir_path</span></em>, <em class="sig-param"><span class="n">xl_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.update_xl_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.update_xl_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates dimensions and table from a worksheet from all the Excel files (with or without identifiers) from a directory. It will
+update a section of ‘data’, which has an identical dimension structure (excluding ‘Data_Block’ with new data.
+The new block’s meta information will be referenced in the original blocks data to show history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – Path to the directory containing the files</p></li>
+<li><p><strong>xl_id</strong> – String used to filter files to extract data, i.e. if file name is “Budget v3.xlsx” you could say ‘v3.xlsx’</p></li>
+<li><p><strong>ws_name</strong> – Worksheet to read.  Input as string i.e. ‘Sales’ or index.  Zero is default.</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.update_xl_sheets">
+<code class="sig-name descname">update_xl_sheets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span></em>, <em class="sig-param"><span class="n">wb_sheets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">table_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idx_cols</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_names_coords</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dim_coords</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.update_xl_sheets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.update_xl_sheets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates all the tables from worksheets within an Excel file. It will
+update a section of ‘data’, which has an identical dimension structure (excluding ‘Data_Block’ with new data.
+The new block’s meta information will be referenced in the original blocks data to show history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f_path</strong> – Path to the file</p></li>
+<li><p><strong>wb_sheets</strong> – Worksheets to read.  Input as list i.e. [‘Sales’, ‘Operations’]</p></li>
+<li><p><strong>table_coords</strong> – Excel references for top left and bottom right of table.  i.e. [‘B7’, ‘Z20’].</p></li>
+<li><p><strong>idx_cols</strong> – Number of index columns to use.  0 would be the first column and 3 would mean first 3 columns.</p></li>
+<li><p><strong>dim_names</strong> – New dimensions names to add.  i.e. [‘Department’, ‘Geography’]</p></li>
+<li><p><strong>dim_vals</strong> – Values for new dimensions.  i.e. [‘Sales’, ‘North America’]</p></li>
+<li><p><strong>dim_names_coords</strong> – Excel references to get dimension names from the Excel.  i.e. [‘A3’, ‘A4’].</p></li>
+<li><p><strong>dim_coords</strong> – Excel references to get dimension values from the Excel.  i.e. [‘B3’, ‘B4’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.variance_analysis">
+<code class="sig-name descname">variance_analysis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_name</span></em>, <em class="sig-param"><span class="n">dim1</span></em>, <em class="sig-param"><span class="n">dim2</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.variance_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.variance_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns and difference and percent difference analysis based on two items with in a dimension. I.e.
+x.variance_analysis(‘Type’, ‘Actual’, ‘Budget’) will produce the ‘variance’ data object with amount and
+percent differences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_name</strong> – String object of the name of dimension.  I.e. ‘Type’ or ‘Region’.</p></li>
+<li><p><strong>dim1</strong> – String object of the name of dimension item for first part of calculation.  I.e. ‘Actual’ or ‘North’.</p></li>
+<li><p><strong>dim2</strong> – String object of the name of dimension item for comparison.  I.e. ‘Budget’ or ‘South’.</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘data’. Available - ‘data’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.variance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="modules.html">pyfpa_pkg</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="setup.html">setup module</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Erik Warren.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>
