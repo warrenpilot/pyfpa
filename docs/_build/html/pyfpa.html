@@ -354,7 +354,7 @@ match, this will fill in the missing pieces.</p>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.keyword_slice">
-<code class="sig-name descname">keyword_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keywords</span></em>, <em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.keyword_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.keyword_slice" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">keyword_slice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keywords</span></em>, <em class="sig-param"><span class="n">dims</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em>, <em class="sig-param"><span class="n">append_to</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.keyword_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.keyword_slice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Slice data based on string fragment.  Function will search the index &amp; data and return any rows with the
 search string.</p>
 <dl class="field-list simple">
@@ -363,6 +363,7 @@ search string.</p>
 <li><p><strong>keywords</strong> – String object of which to search.  I.e. ‘Rent’, ‘LLC’, ‘Smith’</p></li>
 <li><p><strong>dims</strong> – String or list object of specific dimensions to search. Blank will search all dimensions &amp; data.</p></li>
 <li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘data’. Available - ‘data’, ‘slice’</p></li>
+<li><p><strong>append_to</strong> – True indicates new search will be appended to existing search results.  False means it won’t.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -500,12 +501,20 @@ to the Line Item if you have it.</p>
 <dt id="pyfpa.fpa.multiply_dim">
 <code class="sig-name descname">multiply_dim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_name</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calc_name</span><span class="o">=</span><span class="default_value">'New Item'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'slice'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.multiply_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.multiply_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiply two or more dimension items.  For example, multiply units x price x discount with
-x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]
-:param dim_name: String object of dimension name.  I.e. ‘Basis’.
-:param dim_vals: List object of dimension items to multiply.  I.e. [‘Units’, ‘Price’, ‘Discount’]
-:param calc_name: String object of new dimension item name.  I.e. ‘Total_Revenue’
-:param data_obj: Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’
-:return: self.function_result</p>
+x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_name</strong> – String object of dimension name.  I.e. ‘Basis’.</p></li>
+<li><p><strong>dim_vals</strong> – List object of dimension items to multiply.  I.e. [‘Units’, ‘Price’, ‘Discount’]</p></li>
+<li><p><strong>calc_name</strong> – String object of new dimension item name.  I.e. ‘Total_Revenue’</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self.function_result</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -550,15 +559,17 @@ x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]
 <dt id="pyfpa.fpa.rename_dimensions">
 <code class="sig-name descname">rename_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_list</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.rename_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.rename_dimensions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Give new names to one or all of the dimension names.  I.e. if dimensions are [‘Department’, ‘Region’, ‘Data_Block’]
-it can be changed to [‘Department’, ‘Geography’, ‘Data_Block’]
-:param dim_list: List of all the dimension names with the new names included
-:param data_obj: Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,</p>
-<blockquote>
-<div><p>‘function_result’, ‘variance’</p>
-</div></blockquote>
+it can be changed to [‘Department’, ‘Geography’, ‘Data_Block’]</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>data object</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim_list</strong> – List of all the dimension names with the new names included</p></li>
+<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
+‘function_result’, ‘variance’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data object</p>
 </dd>
 </dl>
 </dd></dl>

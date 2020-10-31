@@ -943,6 +943,7 @@ class fpa:
         """
         Give new names to one or all of the dimension names.  I.e. if dimensions are ['Department', 'Region', 'Data_Block']
         it can be changed to ['Department', 'Geography', 'Data_Block']
+        
         :param dim_list: List of all the dimension names with the new names included
         :param data_obj: Which data object you want o effect.  Available - 'block', 'data', 'slice', 'consolidation',
          'function_result', 'variance'
@@ -2018,6 +2019,7 @@ class fpa:
         """
         Multiply two or more dimension items.  For example, multiply units x price x discount with
         x.multiply_dim('Basis', ['Units', 'Price', 'Discount']
+        
         :param dim_name: String object of dimension name.  I.e. 'Basis'.
         :param dim_vals: List object of dimension items to multiply.  I.e. ['Units', 'Price', 'Discount']
         :param calc_name: String object of new dimension item name.  I.e. 'Total_Revenue'
