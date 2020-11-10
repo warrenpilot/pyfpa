@@ -31,14 +31,15 @@
         
         
   <h1>Source code for pyfpa</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Project for Financial Planning and Analysis</span>
 
 <span class="sd">Written by Erik Warren</span>
-<span class="sd">Written for Rebecca, Ethan and Clare</span>
-<span class="sd">October 2020</span>
-<span class="sd">version: 0.0.1 beta</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Original Date: October 2020</span>
+<span class="sd">Version Date: November 2020</span>
+<span class="sd">version: 0.0.3 beta</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -81,10 +82,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">fpath</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-                <span class="n">fpath</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">ws_name</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="n">cols_to_index</span>
+                <span class="n">fpath</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">ws_name</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;TEMP_NAME_ZZ&#39;</span>
+            <span class="n">all_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+            <span class="n">cols_to_index</span> <span class="o">=</span> <span class="n">cols_to_index</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cols_to_index</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">cols_to_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cols_to_index</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>          <span class="c1">#Fix for pandas error with list cols.</span>
+                <span class="k">for</span> <span class="n">item_c</span> <span class="ow">in</span> <span class="n">cols_to_index</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">all_cols</span><span class="p">[</span><span class="n">item_c</span><span class="p">],</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop_dimension</span><span class="p">(</span><span class="s1">&#39;TEMP_NAME_ZZ&#39;</span><span class="p">,</span> <span class="s1">&#39;block&#39;</span><span class="p">)</span>
+        <span class="c1">#self.block.dropna(0, &quot;all&quot;, inplace=True)</span>
+        <span class="c1">#self.block.dropna(1, &quot;all&quot;, inplace=True)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">data_block_value</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">new_index_names</span> <span class="o">=</span> <span class="p">[]</span>
@@ -976,7 +984,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Give new names to one or all of the dimension names.  I.e. if dimensions are [&#39;Department&#39;, &#39;Region&#39;, &#39;Data_Block&#39;]</span>
 <span class="sd">        it can be changed to [&#39;Department&#39;, &#39;Geography&#39;, &#39;Data_Block&#39;]</span>
-<span class="sd">        </span>
 <span class="sd">        :param dim_list: List of all the dimension names with the new names included</span>
 <span class="sd">        :param data_obj: Which data object you want o effect.  Available - &#39;block&#39;, &#39;data&#39;, &#39;slice&#39;, &#39;consolidation&#39;,</span>
 <span class="sd">         &#39;function_result&#39;, &#39;variance&#39;</span>
@@ -1787,14 +1794,14 @@
                         <span class="k">pass</span>
                     <span class="n">keyword_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">keyword_matrix</span><span class="p">,</span> <span class="n">keyword_result</span><span class="p">])</span>
 
+        <span class="k">if</span> <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;TEMP_INDEX&#39;</span><span class="p">:</span>
+            <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">append_to</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="p">,</span> <span class="n">keyword_matrix</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">keyword_matrix</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;TEMP_INDEX&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reorder_dimensions</span><span class="p">(</span><span class="n">original_index_order</span><span class="p">,</span> <span class="s2">&quot;slice&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span></div>
 
@@ -1985,7 +1992,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">value_col</span><span class="p">,</span>
         <span class="n">index_names</span><span class="p">,</span>
-        <span class="n">col_names</span><span class="p">,</span>
+        <span class="n">col_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">data_obj</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
         <span class="n">function</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span>
         <span class="n">totals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1999,12 +2006,28 @@
                 <span class="n">value_col</span><span class="p">,</span>
                 <span class="n">index_names</span><span class="p">,</span>
                 <span class="n">col_names</span><span class="p">,</span>
+                <span class="n">aggfunc</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
                 <span class="n">margins</span><span class="o">=</span><span class="n">totals</span><span class="p">,</span>
                 <span class="n">margins_name</span><span class="o">=</span><span class="n">total_names</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span>
-        <span class="k">if</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;slice&quot;</span><span class="p">:</span>
+
+        <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;slice&quot;</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+                <span class="n">df</span><span class="p">,</span>
+                <span class="n">value_col</span><span class="p">,</span>
+                <span class="n">index_names</span><span class="p">,</span>
+                <span class="n">col_names</span><span class="p">,</span>
+                <span class="n">aggfunc</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+                <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">margins_name</span><span class="o">=</span><span class="n">total_names</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span>
+
+        <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;consolidation&quot;</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
                 <span class="n">df</span><span class="p">,</span>
@@ -2052,7 +2075,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Multiply two or more dimension items.  For example, multiply units x price x discount with</span>
 <span class="sd">        x.multiply_dim(&#39;Basis&#39;, [&#39;Units&#39;, &#39;Price&#39;, &#39;Discount&#39;]</span>
-<span class="sd">        </span>
 <span class="sd">        :param dim_name: String object of dimension name.  I.e. &#39;Basis&#39;.</span>
 <span class="sd">        :param dim_vals: List object of dimension items to multiply.  I.e. [&#39;Units&#39;, &#39;Price&#39;, &#39;Discount&#39;]</span>
 <span class="sd">        :param calc_name: String object of new dimension item name.  I.e. &#39;Total_Revenue&#39;</span>

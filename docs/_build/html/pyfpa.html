@@ -51,9 +51,9 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyfpa" title="Permalink to this headline">¶</a></h2>
 <p>Project for Financial Planning and Analysis</p>
 <p>Written by Erik Warren
-Written for Rebecca, Ethan and Clare
-October 2020
-version: 0.0.1 beta</p>
+Original Date: October 2020
+Version Date: November 2020
+version: 0.0.3 beta</p>
 <dl class="py class">
 <dt id="pyfpa.fpa">
 <em class="property">class </em><code class="sig-prename descclassname">pyfpa.</code><code class="sig-name descname">fpa</code><span class="sig-paren">(</span><em class="sig-param">df=Empty DataFrame Columns: [] Index: []</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa" title="Permalink to this definition">¶</a></dt>
@@ -389,7 +389,7 @@ search string.</p>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.make_pivot_table">
-<code class="sig-name descname">make_pivot_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_col</span></em>, <em class="sig-param"><span class="n">index_names</span></em>, <em class="sig-param"><span class="n">col_names</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em>, <em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">'sum'</span></em>, <em class="sig-param"><span class="n">totals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">total_names</span><span class="o">=</span><span class="default_value">'Total'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.make_pivot_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.make_pivot_table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">make_pivot_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value_col</span></em>, <em class="sig-param"><span class="n">index_names</span></em>, <em class="sig-param"><span class="n">col_names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em>, <em class="sig-param"><span class="n">function</span><span class="o">=</span><span class="default_value">'sum'</span></em>, <em class="sig-param"><span class="n">totals</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">total_names</span><span class="o">=</span><span class="default_value">'Total'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.make_pivot_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.make_pivot_table" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -501,20 +501,12 @@ to the Line Item if you have it.</p>
 <dt id="pyfpa.fpa.multiply_dim">
 <code class="sig-name descname">multiply_dim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_name</span></em>, <em class="sig-param"><span class="n">dim_vals</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calc_name</span><span class="o">=</span><span class="default_value">'New Item'</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'slice'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.multiply_dim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.multiply_dim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiply two or more dimension items.  For example, multiply units x price x discount with
-x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dim_name</strong> – String object of dimension name.  I.e. ‘Basis’.</p></li>
-<li><p><strong>dim_vals</strong> – List object of dimension items to multiply.  I.e. [‘Units’, ‘Price’, ‘Discount’]</p></li>
-<li><p><strong>calc_name</strong> – String object of new dimension item name.  I.e. ‘Total_Revenue’</p></li>
-<li><p><strong>data_obj</strong> – Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>self.function_result</p>
-</dd>
-</dl>
+x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]
+:param dim_name: String object of dimension name.  I.e. ‘Basis’.
+:param dim_vals: List object of dimension items to multiply.  I.e. [‘Units’, ‘Price’, ‘Discount’]
+:param calc_name: String object of new dimension item name.  I.e. ‘Total_Revenue’
+:param data_obj: Which data object you want o effect.  Default: ‘slice’. Available - ‘data’, ‘slice’
+:return: self.function_result</p>
 </dd></dl>
 
 <dl class="py method">
@@ -559,17 +551,15 @@ x.multiply_dim(‘Basis’, [‘Units’, ‘Price’, ‘Discount’]</p>
 <dt id="pyfpa.fpa.rename_dimensions">
 <code class="sig-name descname">rename_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dim_list</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.rename_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.rename_dimensions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Give new names to one or all of the dimension names.  I.e. if dimensions are [‘Department’, ‘Region’, ‘Data_Block’]
-it can be changed to [‘Department’, ‘Geography’, ‘Data_Block’]</p>
+it can be changed to [‘Department’, ‘Geography’, ‘Data_Block’]
+:param dim_list: List of all the dimension names with the new names included
+:param data_obj: Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,</p>
+<blockquote>
+<div><p>‘function_result’, ‘variance’</p>
+</div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dim_list</strong> – List of all the dimension names with the new names included</p></li>
-<li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
-‘function_result’, ‘variance’</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>data object</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>data object</p>
 </dd>
 </dl>
 </dd></dl>

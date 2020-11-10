@@ -1,11 +1,12 @@
-"""
+'''
 Project for Financial Planning and Analysis
 
 Written by Erik Warren
-Written for Rebecca, Ethan and Clare
-October 2020
-version: 0.0.1 beta
-"""
+Original Date: October 2020
+Version Date: November 2020
+version: 0.0.3 beta
+'''
+
 
 import pandas as pd
 import numpy as np
@@ -48,10 +49,17 @@ class fpa:
             self.block = fpath.copy()
         else:
             self.block = pd.read_excel(
-                fpath, sheet_name=ws_name, index_col=cols_to_index
+                fpath, sheet_name=ws_name
             )
-        self.block.dropna(0, "all", inplace=True)
-        self.block.dropna(1, "all", inplace=True)
+            self.block.index.name = 'TEMP_NAME_ZZ'
+            all_cols = list(self.block.columns)
+            cols_to_index = cols_to_index if isinstance(cols_to_index, list) else [cols_to_index]
+            if isinstance(cols_to_index, list):          #Fix for pandas error with list cols.
+                for item_c in cols_to_index:
+                    self.block.set_index(all_cols[item_c], append=True, inplace=True)
+            self.drop_dimension('TEMP_NAME_ZZ', 'block')
+        #self.block.dropna(0, "all", inplace=True)
+        #self.block.dropna(1, "all", inplace=True)
         self.base = self.block.copy()
         data_block_value = 0
         new_index_names = []
@@ -943,7 +951,6 @@ class fpa:
         """
         Give new names to one or all of the dimension names.  I.e. if dimensions are ['Department', 'Region', 'Data_Block']
         it can be changed to ['Department', 'Geography', 'Data_Block']
-        
         :param dim_list: List of all the dimension names with the new names included
         :param data_obj: Which data object you want o effect.  Available - 'block', 'data', 'slice', 'consolidation',
          'function_result', 'variance'
@@ -1754,14 +1761,14 @@ class fpa:
                         pass
                     keyword_matrix = pd.concat([keyword_matrix, keyword_result])
 
+        if keyword_matrix.index.name == 'TEMP_INDEX':
+            keyword_matrix.set_index(dims, inplace=True)
+        else:
+            keyword_matrix.set_index(dims, append=True, inplace=True)
         if append_to == True:
             self.slice = pd.concat([self.slice, keyword_matrix])
         else:
             self.slice = keyword_matrix
-        if self.slice.index.name == 'TEMP_INDEX':
-            self.slice.set_index(dims, inplace=True)
-        else:
-            self.slice.set_index(dims, append=True, inplace=True)
         self.reorder_dimensions(original_index_order, "slice")
         return self.slice
 
@@ -1952,7 +1959,7 @@ class fpa:
         self,
         value_col,
         index_names,
-        col_names,
+        col_names=None,
         data_obj="data",
         function="sum",
         totals=True,
@@ -1966,12 +1973,28 @@ class fpa:
                 value_col,
                 index_names,
                 col_names,
+                aggfunc=function,
                 margins=totals,
                 margins_name=total_names,
             )
             return self.function_result
-        if data_obj == "slice":
+
+        elif data_obj == "slice":
             df = self.slice.copy()
+            df.reset_index(inplace=True)
+            self.function_result= pd.pivot_table(
+                df,
+                value_col,
+                index_names,
+                col_names,
+                aggfunc=function,
+                margins=True,
+                margins_name=total_names,
+            )
+            return self.function_result
+
+        elif data_obj == "consolidation":
+            df = self.consolidation.copy()
             df.reset_index(inplace=True)
             self.function_result= pd.pivot_table(
                 df,
@@ -2019,7 +2042,6 @@ class fpa:
         """
         Multiply two or more dimension items.  For example, multiply units x price x discount with
         x.multiply_dim('Basis', ['Units', 'Price', 'Discount']
-        
         :param dim_name: String object of dimension name.  I.e. 'Basis'.
         :param dim_vals: List object of dimension items to multiply.  I.e. ['Units', 'Price', 'Discount']
         :param calc_name: String object of new dimension item name.  I.e. 'Total_Revenue'
