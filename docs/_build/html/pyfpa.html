@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyfpa package &#8212; pyfpa 0.0.3 documentation</title>
+    <title>pyfpa package &#8212; pyfpa 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -19,7 +19,7 @@
     <link rel="prev" title="pyfpa_pkg" href="modules.html" /> 
   </head><body>
       <div class="header" role="banner"><h1 class="heading"><a href="index.html">
-          <span>pyfpa 0.0.3 documentation</span></a></h1>
+          <span>pyfpa 0.0.6 documentation</span></a></h1>
         <h2 class="heading"><span>pyfpa package</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -38,11 +38,9 @@
         
   <div class="section" id="pyfpa-package">
 <h1>pyfpa package<a class="headerlink" href="#pyfpa-package" title="Permalink to this headline">¶</a></h1>
+<p>Listing of functions for pyfpa</p>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="pyfpa-cli-module">
-<h2>pyfpa.cli module<a class="headerlink" href="#pyfpa-cli-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="pyfpa-pyfpa-module">
 <h2>pyfpa.pyfpa module<a class="headerlink" href="#pyfpa-pyfpa-module" title="Permalink to this headline">¶</a></h2>
@@ -53,7 +51,7 @@
 <p>Written by Erik Warren
 Original Date: October 2020
 Version Date: November 2020
-version: 0.0.3 beta</p>
+version: 0.0.6 beta</p>
 <dl class="py class">
 <dt id="pyfpa.fpa">
 <em class="property">class </em><code class="sig-prename descclassname">pyfpa.</code><code class="sig-name descname">fpa</code><span class="sig-paren">(</span><em class="sig-param">df=Empty DataFrame Columns: [] Index: []</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa" title="Permalink to this definition">¶</a></dt>
@@ -95,6 +93,12 @@ match, this will fill in the missing pieces.</p>
 <dt id="pyfpa.fpa.combine_dimensions">
 <code class="sig-name descname">combine_dimensions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">combine_order</span></em>, <em class="sig-param"><span class="n">data_obj</span><span class="o">=</span><span class="default_value">'data'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.combine_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.combine_dimensions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyfpa.fpa.comma_format">
+<code class="sig-name descname">comma_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimals</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.comma_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.comma_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the display options to show commas and decimal places.  Choices are 0, 1, 2.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.consol_dimension">
@@ -149,7 +153,7 @@ match, this will fill in the missing pieces.</p>
 
 <dl class="py attribute">
 <dt id="pyfpa.fpa.fpa_help">
-<code class="sig-name descname">fpa_help</code><em class="property"> = 'pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&amp;A Professionals.'</em><a class="headerlink" href="#pyfpa.fpa.fpa_help" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fpa_help</code><em class="property"> = 'pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&amp;A people.'</em><a class="headerlink" href="#pyfpa.fpa.fpa_help" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -195,7 +199,7 @@ match, this will fill in the missing pieces.</p>
 
 <dl class="py attribute">
 <dt id="pyfpa.fpa.help_import_xl">
-<code class="sig-name descname">help_import_xl</code><em class="property"> = 'Import Excel or DataFrame to .block.  cols_to_index are columns for index     which can be int or list for Excel. For DataFrame, string or list of string column names.'</em><a class="headerlink" href="#pyfpa.fpa.help_import_xl" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">help_import_xl</code><em class="property"> = 'Import Excel, CSV or DataFrame to .block.  cols_to_index are columns for index     which can be int or list for Excel. For DataFrame, string or list of string column names.'</em><a class="headerlink" href="#pyfpa.fpa.help_import_xl" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -210,7 +214,7 @@ match, this will fill in the missing pieces.</p>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.import_accts_xl">
-<code class="sig-name descname">import_accts_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_name</span><span class="o">=</span><span class="default_value">'nval'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_accts_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_accts_xl" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_accts_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_path</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">dim_name</span><span class="o">=</span><span class="default_value">'nval'</span></em>, <em class="sig-param"><span class="n">sep_val</span><span class="o">=</span><span class="default_value">','</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_accts_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_accts_xl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import a dataframe such as a chart of accounts or sales dimensions for adding to data objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -248,8 +252,8 @@ match, this will fill in the missing pieces.</p>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.import_xl">
-<code class="sig-name descname">import_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">cols_to_index</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_xl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Import a table from a worksheet in a Excel File or an existing pandas DataFrame.</p>
+<code class="sig-name descname">import_xl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">ws_name</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">cols_to_index</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sep_val</span><span class="o">=</span><span class="default_value">','</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.import_xl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.import_xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import a table from a worksheet in a Excel File, a CSV file or an existing pandas DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -428,8 +432,8 @@ to the Line Item if you have it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim_set</strong> – Section of ‘accounts’ data object to take new dimensions.</p></li>
-<li><p><strong>base_dim</strong> – Existing dimension in the index on which to merge the new dimension</p></li>
+<li><p><strong>dim_set</strong> – Section of ‘accounts’ data object to take as new dimensions.</p></li>
+<li><p><strong>base_dim</strong> – Existing dimension in the index and accouts on which to merge the new dimension</p></li>
 <li><p><strong>new_dims</strong> – Column from the accounts data object table to add to the dataframe</p></li>
 <li><p><strong>data_obj</strong> – Which data object you want o effect.  Available - ‘block’, ‘data’, ‘slice’, ‘consolidation’,
 ‘function_result’</p></li>
@@ -648,8 +652,21 @@ I.e. [‘Operations’, [‘Network Costs’, ‘Payroll’]]</p></li>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.slice_to_project">
-<code class="sig-name descname">slice_to_project</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.slice_to_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.slice_to_project" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">slice_to_project</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prj_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyfpa.html#fpa.slice_to_project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfpa.fpa.slice_to_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the slice data object as a project as either a directory with pickle files or as a json object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prj_name</strong> – String object for name of the project.  Will make a directory in path_name if it doesn’t exist.</p></li>
+<li><p><strong>path_name</strong> – Path to directory or a full file path for json.  I.e. for json file
+‘C:/Budgets/Budgets v1.json’ or ‘C:/Budgets/’ for normal save</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nothing</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="pyfpa.fpa.subtract_dim">

@@ -1,16 +1,10 @@
 pyfpa package
 =============
 
+Listing of functions for pyfpa
+
 Submodules
 ----------
-
-pyfpa.cli module
-----------------
-
-.. automodule:: pyfpa.cli
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 pyfpa.pyfpa module
 ------------------

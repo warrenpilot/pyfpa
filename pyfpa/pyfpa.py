@@ -1,11 +1,11 @@
-'''
+"""
 Project for Financial Planning and Analysis
 
 Written by Erik Warren
 Original Date: October 2020
 Version Date: November 2020
-version: 0.0.3 beta
-'''
+version: 0.0.6 beta
+"""
 
 
 import pandas as pd
@@ -16,7 +16,7 @@ from openpyxl import load_workbook
 
 
 class fpa:
-    fpa_help = "pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&A Professionals."
+    fpa_help = "pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&A people."
 
     def __init__(self, df=pd.DataFrame()):
         self.accounts = pd.DataFrame()  # Repository for Chart of Accounts or other
@@ -27,17 +27,18 @@ class fpa:
         self.data = pd.DataFrame()  # The main dataframe for all the data
         self.consolidation = pd.DataFrame()  # Container for consolidate() result
         self.slice = pd.DataFrame()  # Container for slicing and dicing .data
+        self.pivot = pd.DataFrame()  # Container pivot table functions
         self.variance = pd.DataFrame()  # General container for functions
         self.function_result= []  # General container for functions
         # TODO: Add Resample
         # Index names can only be strings
 
-    help_import_xl = '''Import Excel or DataFrame to .block.  cols_to_index are columns for index \
+    help_import_xl = '''Import Excel, CSV or DataFrame to .block.  cols_to_index are columns for index \
     which can be int or list for Excel. For DataFrame, string or list of string column names.'''
 
-    def import_xl(self, fpath, ws_name=0, cols_to_index=0):
+    def import_xl(self, fpath, ws_name=0, cols_to_index=0, sep_val=','):
         """
-        Import a table from a worksheet in a Excel File or an existing pandas DataFrame.
+        Import a table from a worksheet in a Excel File, a CSV file or an existing pandas DataFrame.
 
         :param fpath: path to file OR a pandas DataFrame
         :param ws_name: worksheet name or index such as 0 or 2
@@ -48,9 +49,14 @@ class fpa:
                 fpath.set_index(cols_to_index, append=True, inplace=True)
             self.block = fpath.copy()
         else:
-            self.block = pd.read_excel(
-                fpath, sheet_name=ws_name
-            )
+            if fpath[-3:] == 'csv':
+                self.block = pd.read_csv(
+                    fpath, sep=sep_val, thousands=','
+                )
+            else:
+                self.block = pd.read_excel(
+                    fpath, sheet_name=ws_name
+                )
             self.block.index.name = 'TEMP_NAME_ZZ'
             all_cols = list(self.block.columns)
             cols_to_index = cols_to_index if isinstance(cols_to_index, list) else [cols_to_index]
@@ -91,6 +97,7 @@ class fpa:
             index=[data_block_value],
             columns=[
                 "file",
+                "import_time",
                 "last_modified",
                 "last_accessed",
                 "file_path",
@@ -101,6 +108,7 @@ class fpa:
         meta_df.loc[data_block_value, "file"] = (
             fpath.split("\\")[-1] if isinstance(fpath, str) else file_stats
         )
+        meta_df.loc[data_block_value, "import_time"] = dt.datetime.now()
         meta_df.loc[data_block_value, "file_path"] = (
             fpath if isinstance(fpath, str) else file_stats
         )
@@ -244,7 +252,7 @@ class fpa:
         ).strftime("%Y-%m-%d %H:%M")
         self.meta_block = self.meta_block.append(meta_df)
 
-    def import_accts_xl(self, f_path, ws_name=0, dim_name='nval'):
+    def import_accts_xl(self, f_path, ws_name=0, dim_name='nval', sep_val=','):
         """
         Import a dataframe such as a chart of accounts or sales dimensions for adding to data objects.
 
@@ -253,7 +261,12 @@ class fpa:
         :param dim_name: Identifier for the group used when retrieving it.  See merge_dim_from_accts.
         :return: self.accounts
         """
-        dim_set = pd.read_excel(f_path, ws_name)
+        if f_path[-3:] == 'csv':
+            dim_set = pd.read_csv(
+                f_path, sep=sep_val, thousands=','
+            )
+        else:
+            dim_set = pd.read_excel(f_path, ws_name)
         dim_set.index.name = "index"
         dim_set["dim_set"] = dim_name
         dim_set.set_index("dim_set", append=True, inplace=True)
@@ -782,8 +795,8 @@ class fpa:
         Add dimension based on account data object. If you have a chart of accounts you could add the account number
         to the Line Item if you have it.
 
-        :param dim_set: Section of 'accounts' data object to take new dimensions.
-        :param base_dim: Existing dimension in the index on which to merge the new dimension
+        :param dim_set: Section of 'accounts' data object to take as new dimensions.
+        :param base_dim: Existing dimension in the index and accouts on which to merge the new dimension
         :param new_dims: Column from the accounts data object table to add to the dataframe
         :param data_obj: Which data object you want o effect.  Available - 'block', 'data', 'slice', 'consolidation',
          'function_result'
@@ -798,7 +811,7 @@ class fpa:
             new_dims.append(base_dim)
             dim_df = dim_df.loc[:, new_dims]
             dim_df.set_index(base_dim, inplace=True)
-            dfi = dfi.join(dim_df, base_dim, how="inner")
+            dfi = dfi.join(dim_df, base_dim)
             self.block.index = pd.MultiIndex.from_frame(dfi)
         elif data_obj == "slice":
             dfi = self.slice.index.to_frame()
@@ -806,7 +819,7 @@ class fpa:
             new_dims.append(base_dim)
             dim_df = dim_df.loc[:, new_dims]
             dim_df.set_index(base_dim, inplace=True)
-            dfi = dfi.join(dim_df, base_dim, how="inner")
+            dfi = dfi.join(dim_df, base_dim)
             self.slice.index = pd.MultiIndex.from_frame(dfi)
         elif data_obj == "consolidation":
             dfi = self.consolidation.index.to_frame()
@@ -814,7 +827,7 @@ class fpa:
             new_dims.append(base_dim)
             dim_df = dim_df.loc[:, new_dims]
             dim_df.set_index(base_dim, inplace=True)
-            dfi = dfi.join(dim_df, base_dim, how="inner")
+            dfi = dfi.join(dim_df, base_dim)
             self.consolidation.index = pd.MultiIndex.from_frame(dfi)
         elif data_obj == "variance":
             dfi = self.variance.index.to_frame()
@@ -822,7 +835,7 @@ class fpa:
             new_dims.append(base_dim)
             dim_df = dim_df.loc[:, new_dims]
             dim_df.set_index(base_dim, inplace=True)
-            dfi = dfi.join(dim_df, base_dim, how="inner")
+            dfi = dfi.join(dim_df, base_dim)
             self.variance.index = pd.MultiIndex.from_frame(dfi)
         elif data_obj == "function_result":
             dfi = self.function_result.index.to_frame()
@@ -830,7 +843,7 @@ class fpa:
             new_dims.append(base_dim)
             dim_df = dim_df.loc[:, new_dims]
             dim_df.set_index(base_dim, inplace=True)
-            dfi = dfi.join(dim_df, base_dim, how="inner")
+            dfi = dfi.join(dim_df, base_dim)
             self.function_result.index = pd.MultiIndex.from_frame(dfi)
         else:
             dfi = self.data.index.to_frame()
@@ -838,7 +851,7 @@ class fpa:
             new_dims.append(base_dim)
             dim_df = dim_df.loc[:, new_dims]
             dim_df.set_index(base_dim, inplace=True)
-            dfi = dfi.join(dim_df, base_dim, how="inner")
+            dfi = dfi.join(dim_df, base_dim)
             self.data.index = pd.MultiIndex.from_frame(dfi)
 
     help_merge_dim_from_xl = (
@@ -1228,6 +1241,19 @@ class fpa:
         else:
             self.function_result.index = self.function_result.index.droplevel(dimension_drop)
 
+    def comma_format(self, decimals=0):
+        """
+        Changes the display options to show commas and decimal places.  Choices are 0, 1, 2.
+
+        """
+        if decimals == 2:
+            pd.options.display.float_format = '{:,.2f}'.format
+        elif decimals == 1:
+            pd.options.display.float_format = '{:,.1f}'.format
+        else:
+            pd.options.display.float_format = '{:,.0f}'.format
+
+
     def get_block_info(self, db_id):
         """
         Retrieve the meta information from a data block.  Just plug in the data block number.
@@ -1377,7 +1403,7 @@ class fpa:
                             for item_s in dim_values:
                                 single_slice = self.data.loc[item_s]
                     self.slice = pd.concat([self.slice, single_slice])
-                    if isinstance(self.data.index, pd.Index):
+                    if not isinstance(self.data.index, pd.MultiIndex):
                         self.slice.drop_duplicates(inplace=True)
                 self.slice.sort_index(inplace=True)
             # Column Search
@@ -1495,7 +1521,7 @@ class fpa:
                             for item_s in dim_values:
                                 single_slice = self.consolidation.loc[item_s]
                     self.slice = pd.concat([self.slice, single_slice])
-                    if isinstance(self.consolidation.index, pd.Index):
+                    if not isinstance(self.consolidation.index, pd.MultiIndex):
                         self.slice.drop_duplicates(inplace=True)
                 self.slice.sort_index(inplace=True)
             # Column Search
@@ -1616,7 +1642,7 @@ class fpa:
                             for item_s in dim_values:
                                 single_slice = self.data.loc[item_s]
                     self.slice = pd.concat([self.slice, single_slice])
-                    if isinstance(self.slice.index, pd.Index):
+                    if not isinstance(self.slice.index, pd.MultiIndex):
                         self.slice.drop_duplicates(inplace=True)
                 self.slice.sort_index(inplace=True)
             # Column Search
@@ -1719,15 +1745,18 @@ class fpa:
         """
         if data_obj == "data":
             keywords = [keywords] if isinstance(keywords, str) else keywords
+            dims = [dims] if isinstance(dims, str) else dims
             word_slice = self.data.copy()
             original_index_order = word_slice.index.names
-            if dims == None:
+            if not dims:
                 dims = original_index_order.copy()
-            word_slice.reset_index(dims, inplace=True)
-            if dims == original_index_order:
+            for dim_x in dims:
+                if dim_x in self.data.index.names:
+                    word_slice.reset_index(dim_x, inplace=True)
+            if not isinstance(word_slice.index, pd.MultiIndex):
                 word_slice.index.name = 'TEMP_INDEX'
             keyword_matrix = pd.DataFrame()
-            for col in word_slice.columns:
+            for col in dims:
                 for word in keywords:
                     keyword_result = pd.DataFrame()
                     try:
@@ -1741,15 +1770,18 @@ class fpa:
 
         elif data_obj == "slice":
             keywords = [keywords] if isinstance(keywords, str) else keywords
+            dims = [dims] if isinstance(dims, str) else dims
             word_slice = self.slice.copy()
             original_index_order = word_slice.index.names
-            if dims == None:
+            if not dims:
                 dims = original_index_order.copy()
-            word_slice.reset_index(dims, inplace=True)
-            if dims == original_index_order:
+            for dim_x in dims:
+                if dim_x in self.data.index.names:
+                    word_slice.reset_index(dim_x, inplace=True)
+            if not isinstance(word_slice.index, pd.MultiIndex):
                 word_slice.index.name = 'TEMP_INDEX'
             keyword_matrix = pd.DataFrame()
-            for col in word_slice.columns:
+            for col in dims:
                 for word in keywords:
                     keyword_result = pd.DataFrame()
                     try:
@@ -1762,14 +1794,19 @@ class fpa:
                     keyword_matrix = pd.concat([keyword_matrix, keyword_result])
 
         if keyword_matrix.index.name == 'TEMP_INDEX':
-            keyword_matrix.set_index(dims, inplace=True)
+            dims_return = [x for x in original_index_order if x in dims]
+            if dims_return:
+                keyword_matrix.set_index(dims_return, inplace=True)
         else:
-            keyword_matrix.set_index(dims, append=True, inplace=True)
+            dims_return = [x for x in original_index_order if x in dims]
+            if dims_return:
+                keyword_matrix.set_index(dims_return, append=True, inplace=True)
         if append_to == True:
             self.slice = pd.concat([self.slice, keyword_matrix])
         else:
             self.slice = keyword_matrix
-        self.reorder_dimensions(original_index_order, "slice")
+        if isinstance(self.slice.index, pd.MultiIndex):
+            self.reorder_dimensions(original_index_order, "slice")
         return self.slice
 
     def keyword_replace(self, target_words, replace_words, dims=None, data_obj="data"):
@@ -1952,8 +1989,53 @@ class fpa:
             accounts_df = pd.read_pickle(path_name + f_name)
             self.accounts = accounts_df
 
-    def slice_to_project(self):
-        x = 1
+    def slice_to_project(self, prj_name=None, path_name=None):
+        """
+        Saves the slice data object as a project as either a directory with pickle files or as a json object.
+
+        :param prj_name: String object for name of the project.  Will make a directory in path_name if it doesn't exist.
+        :param path_name: Path to directory or a full file path for json.  I.e. for json file
+         'C:/Budgets/Budgets v1.json' or 'C:/Budgets/' for normal save
+        :return: nothing
+        """
+        if path_name == None:
+            path_name = os.getcwd()
+        if path_name[-4:] == "json":
+            container = pd.DataFrame(
+                index=["data", "data_idx", "meta", "accounts", "accts_idx"],
+                columns=["Load"],
+            )
+            container.loc["data", "Load"] = self.slice.to_json(orient="index")
+            container.loc["data_idx", "Load"] = self.data.index.to_frame().to_json(
+                orient="index"
+            )
+            container.loc["meta", "Load"] = self.meta_block.to_json(orient="index")
+            container.loc["accounts", "Load"] = self.accounts.to_json(orient="index")
+            container.loc["accts_idx", "Load"] = self.accounts.index.to_frame().to_json(
+                orient="index"
+            )
+            container.to_json(path_name, orient="index")
+        else:
+            if path_name != None:
+                path_name = path_name.replace('\\', '/')
+                if path_name[-1] != '/':
+                    path_name = path_name + '/'
+            if path_name == None:
+                path_name = os.getcwd()
+                path_name = path_name.replace('\\', '/')
+                if not os.path.isdir(prj_name):
+                    os.mkdir(prj_name)
+            else:
+                if not os.path.isdir(path_name + prj_name):
+                    os.mkdir(path_name + prj_name)
+            self.slice.to_pickle(path_name + prj_name + "/" + prj_name + " - data.pkl")
+            self.meta_block.to_pickle(
+                path_name + prj_name + "/" + prj_name + " - meta_block.pkl"
+            )
+            self.accounts.to_pickle(
+                path_name + prj_name + "/" + prj_name + " - accounts.pkl"
+            )
+
 
     def make_pivot_table(
         self,
@@ -1968,7 +2050,7 @@ class fpa:
         if data_obj == "data":
             df = self.data.copy()
             df.reset_index(inplace=True)
-            self.function_result= pd.pivot_table(
+            self.pivot = pd.pivot_table(
                 df,
                 value_col,
                 index_names,
@@ -1977,12 +2059,12 @@ class fpa:
                 margins=totals,
                 margins_name=total_names,
             )
-            return self.function_result
+            return self.pivot
 
         elif data_obj == "slice":
             df = self.slice.copy()
             df.reset_index(inplace=True)
-            self.function_result= pd.pivot_table(
+            self.pivot = pd.pivot_table(
                 df,
                 value_col,
                 index_names,
@@ -1991,12 +2073,12 @@ class fpa:
                 margins=True,
                 margins_name=total_names,
             )
-            return self.function_result
+            return self.pivot
 
         elif data_obj == "consolidation":
             df = self.consolidation.copy()
             df.reset_index(inplace=True)
-            self.function_result= pd.pivot_table(
+            self.pivot = pd.pivot_table(
                 df,
                 value_col,
                 index_names,
@@ -2005,7 +2087,22 @@ class fpa:
                 margins=True,
                 margins_name=total_names,
             )
-            return self.function_result
+            return self.pivot
+
+        elif data_obj == "function_result":
+            df = self.function_result.copy()
+            df.reset_index(inplace=True)
+            self.pivot = pd.pivot_table(
+                df,
+                value_col,
+                index_names,
+                col_names,
+                aggfunc=function,
+                margins=True,
+                margins_name=total_names,
+            )
+            return self.pivot
+
 
     def variance_analysis(self, dim_name, dim1, dim2, data_obj="data"):
         """
@@ -2030,7 +2127,7 @@ class fpa:
             df2 = self.slice.xs(dim2, level=dim_name)
             df2 = df2.droplevel("Data_Block")
         amt_var = df1 - df2
-        pct_var = df1 / df2 - 1
+        pct_var = df1.divide(df2) - 1
         self.variance = pd.concat([amt_var, pct_var], keys=["Amount", "Percent"])
         return self.variance
 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyfpa &#8212; pyfpa 0.0.3 documentation</title>
+    <title>pyfpa &#8212; pyfpa 0.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
-          <span>pyfpa 0.0.3 documentation</span></a></h1>
+          <span>pyfpa 0.0.6 documentation</span></a></h1>
         <h2 class="heading"><span>pyfpa</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -31,14 +31,14 @@
         
         
   <h1>Source code for pyfpa</h1><div class="highlight"><pre>
-<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Project for Financial Planning and Analysis</span>
 
 <span class="sd">Written by Erik Warren</span>
 <span class="sd">Original Date: October 2020</span>
 <span class="sd">Version Date: November 2020</span>
-<span class="sd">version: 0.0.3 beta</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">version: 0.0.6 beta</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -49,7 +49,7 @@
 
 
 <div class="viewcode-block" id="fpa"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa">[docs]</a><span class="k">class</span> <span class="nc">fpa</span><span class="p">:</span>
-    <span class="n">fpa_help</span> <span class="o">=</span> <span class="s2">&quot;pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&amp;A Professionals.&quot;</span>
+    <span class="n">fpa_help</span> <span class="o">=</span> <span class="s2">&quot;pyfpa - Financial Planning and Analysis Python Project.  Python intro for FP&amp;A people.&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">accounts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>  <span class="c1"># Repository for Chart of Accounts or other</span>
@@ -60,17 +60,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>  <span class="c1"># The main dataframe for all the data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>  <span class="c1"># Container for consolidate() result</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>  <span class="c1"># Container for slicing and dicing .data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>  <span class="c1"># Container pivot table functions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>  <span class="c1"># General container for functions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">=</span> <span class="p">[]</span>  <span class="c1"># General container for functions</span>
         <span class="c1"># TODO: Add Resample</span>
         <span class="c1"># Index names can only be strings</span>
 
-    <span class="n">help_import_xl</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Import Excel or DataFrame to .block.  cols_to_index are columns for index </span><span class="se">\</span>
+    <span class="n">help_import_xl</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Import Excel, CSV or DataFrame to .block.  cols_to_index are columns for index </span><span class="se">\</span>
 <span class="s1">    which can be int or list for Excel. For DataFrame, string or list of string column names.&#39;&#39;&#39;</span>
 
-<div class="viewcode-block" id="fpa.import_xl"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.import_xl">[docs]</a>    <span class="k">def</span> <span class="nf">import_xl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">ws_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cols_to_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="fpa.import_xl"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.import_xl">[docs]</a>    <span class="k">def</span> <span class="nf">import_xl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">,</span> <span class="n">ws_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cols_to_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep_val</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Import a table from a worksheet in a Excel File or an existing pandas DataFrame.</span>
+<span class="sd">        Import a table from a worksheet in a Excel File, a CSV file or an existing pandas DataFrame.</span>
 
 <span class="sd">        :param fpath: path to file OR a pandas DataFrame</span>
 <span class="sd">        :param ws_name: worksheet name or index such as 0 or 2</span>
@@ -81,9 +82,14 @@
                 <span class="n">fpath</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">cols_to_index</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">fpath</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-                <span class="n">fpath</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">ws_name</span>
-            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">fpath</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+                    <span class="n">fpath</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep_val</span><span class="p">,</span> <span class="n">thousands</span><span class="o">=</span><span class="s1">&#39;,&#39;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
+                    <span class="n">fpath</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">ws_name</span>
+                <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;TEMP_NAME_ZZ&#39;</span>
             <span class="n">all_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
             <span class="n">cols_to_index</span> <span class="o">=</span> <span class="n">cols_to_index</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cols_to_index</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">cols_to_index</span><span class="p">]</span>
@@ -124,6 +130,7 @@
             <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">data_block_value</span><span class="p">],</span>
             <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
                 <span class="s2">&quot;file&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;import_time&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;last_modified&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;last_accessed&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;file_path&quot;</span><span class="p">,</span>
@@ -134,6 +141,7 @@
         <span class="n">meta_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data_block_value</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">fpath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">file_stats</span>
         <span class="p">)</span>
+        <span class="n">meta_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data_block_value</span><span class="p">,</span> <span class="s2">&quot;import_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="n">meta_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data_block_value</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">fpath</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">file_stats</span>
         <span class="p">)</span>
@@ -277,7 +285,7 @@
         <span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">meta_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meta_df</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="fpa.import_accts_xl"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.import_accts_xl">[docs]</a>    <span class="k">def</span> <span class="nf">import_accts_xl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_path</span><span class="p">,</span> <span class="n">ws_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_name</span><span class="o">=</span><span class="s1">&#39;nval&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="fpa.import_accts_xl"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.import_accts_xl">[docs]</a>    <span class="k">def</span> <span class="nf">import_accts_xl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_path</span><span class="p">,</span> <span class="n">ws_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_name</span><span class="o">=</span><span class="s1">&#39;nval&#39;</span><span class="p">,</span> <span class="n">sep_val</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Import a dataframe such as a chart of accounts or sales dimensions for adding to data objects.</span>
 
@@ -286,7 +294,12 @@
 <span class="sd">        :param dim_name: Identifier for the group used when retrieving it.  See merge_dim_from_accts.</span>
 <span class="sd">        :return: self.accounts</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dim_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">f_path</span><span class="p">,</span> <span class="n">ws_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">f_path</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+            <span class="n">dim_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+                <span class="n">f_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep_val</span><span class="p">,</span> <span class="n">thousands</span><span class="o">=</span><span class="s1">&#39;,&#39;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dim_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">f_path</span><span class="p">,</span> <span class="n">ws_name</span><span class="p">)</span>
         <span class="n">dim_set</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span>
         <span class="n">dim_set</span><span class="p">[</span><span class="s2">&quot;dim_set&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dim_name</span>
         <span class="n">dim_set</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;dim_set&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -815,8 +828,8 @@
 <span class="sd">        Add dimension based on account data object. If you have a chart of accounts you could add the account number</span>
 <span class="sd">        to the Line Item if you have it.</span>
 
-<span class="sd">        :param dim_set: Section of &#39;accounts&#39; data object to take new dimensions.</span>
-<span class="sd">        :param base_dim: Existing dimension in the index on which to merge the new dimension</span>
+<span class="sd">        :param dim_set: Section of &#39;accounts&#39; data object to take as new dimensions.</span>
+<span class="sd">        :param base_dim: Existing dimension in the index and accouts on which to merge the new dimension</span>
 <span class="sd">        :param new_dims: Column from the accounts data object table to add to the dataframe</span>
 <span class="sd">        :param data_obj: Which data object you want o effect.  Available - &#39;block&#39;, &#39;data&#39;, &#39;slice&#39;, &#39;consolidation&#39;,</span>
 <span class="sd">         &#39;function_result&#39;</span>
@@ -831,7 +844,7 @@
             <span class="n">new_dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_dim</span><span class="p">)</span>
             <span class="n">dim_df</span> <span class="o">=</span> <span class="n">dim_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">new_dims</span><span class="p">]</span>
             <span class="n">dim_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">base_dim</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">dfi</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;slice&quot;</span><span class="p">:</span>
             <span class="n">dfi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
@@ -839,7 +852,7 @@
             <span class="n">new_dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_dim</span><span class="p">)</span>
             <span class="n">dim_df</span> <span class="o">=</span> <span class="n">dim_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">new_dims</span><span class="p">]</span>
             <span class="n">dim_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">base_dim</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">dfi</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;consolidation&quot;</span><span class="p">:</span>
             <span class="n">dfi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
@@ -847,7 +860,7 @@
             <span class="n">new_dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_dim</span><span class="p">)</span>
             <span class="n">dim_df</span> <span class="o">=</span> <span class="n">dim_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">new_dims</span><span class="p">]</span>
             <span class="n">dim_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">base_dim</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">dfi</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;variance&quot;</span><span class="p">:</span>
             <span class="n">dfi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
@@ -855,7 +868,7 @@
             <span class="n">new_dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_dim</span><span class="p">)</span>
             <span class="n">dim_df</span> <span class="o">=</span> <span class="n">dim_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">new_dims</span><span class="p">]</span>
             <span class="n">dim_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">base_dim</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">dfi</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;function_result&quot;</span><span class="p">:</span>
             <span class="n">dfi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
@@ -863,7 +876,7 @@
             <span class="n">new_dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_dim</span><span class="p">)</span>
             <span class="n">dim_df</span> <span class="o">=</span> <span class="n">dim_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">new_dims</span><span class="p">]</span>
             <span class="n">dim_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">base_dim</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">dfi</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dfi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
@@ -871,7 +884,7 @@
             <span class="n">new_dims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_dim</span><span class="p">)</span>
             <span class="n">dim_df</span> <span class="o">=</span> <span class="n">dim_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">new_dims</span><span class="p">]</span>
             <span class="n">dim_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">base_dim</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span>
+            <span class="n">dfi</span> <span class="o">=</span> <span class="n">dfi</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dim_df</span><span class="p">,</span> <span class="n">base_dim</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_frame</span><span class="p">(</span><span class="n">dfi</span><span class="p">)</span></div>
 
     <span class="n">help_merge_dim_from_xl</span> <span class="o">=</span> <span class="p">(</span>
@@ -1261,6 +1274,19 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="n">dimension_drop</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="fpa.comma_format"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.comma_format">[docs]</a>    <span class="k">def</span> <span class="nf">comma_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the display options to show commas and decimal places.  Choices are 0, 1, 2.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">decimals</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+        <span class="k">elif</span> <span class="n">decimals</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">float_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:,.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span></div>
+
+
 <div class="viewcode-block" id="fpa.get_block_info"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.get_block_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_block_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve the meta information from a data block.  Just plug in the data block number.</span>
@@ -1410,7 +1436,7 @@
                             <span class="k">for</span> <span class="n">item_s</span> <span class="ow">in</span> <span class="n">dim_values</span><span class="p">:</span>
                                 <span class="n">single_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">item_s</span><span class="p">]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="p">,</span> <span class="n">single_slice</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="c1"># Column Search</span>
@@ -1528,7 +1554,7 @@
                             <span class="k">for</span> <span class="n">item_s</span> <span class="ow">in</span> <span class="n">dim_values</span><span class="p">:</span>
                                 <span class="n">single_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">item_s</span><span class="p">]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="p">,</span> <span class="n">single_slice</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="c1"># Column Search</span>
@@ -1649,7 +1675,7 @@
                             <span class="k">for</span> <span class="n">item_s</span> <span class="ow">in</span> <span class="n">dim_values</span><span class="p">:</span>
                                 <span class="n">single_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">item_s</span><span class="p">]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="p">,</span> <span class="n">single_slice</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="c1"># Column Search</span>
@@ -1752,15 +1778,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span>
             <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="n">keywords</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">keywords</span>
+            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dims</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">dims</span>
             <span class="n">word_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">original_index_order</span> <span class="o">=</span> <span class="n">word_slice</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span>
-            <span class="k">if</span> <span class="n">dims</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">dims</span><span class="p">:</span>
                 <span class="n">dims</span> <span class="o">=</span> <span class="n">original_index_order</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">word_slice</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">dims</span> <span class="o">==</span> <span class="n">original_index_order</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">dim_x</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dim_x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+                    <span class="n">word_slice</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">dim_x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word_slice</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
                 <span class="n">word_slice</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;TEMP_INDEX&#39;</span>
             <span class="n">keyword_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">word_slice</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
                     <span class="n">keyword_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
                     <span class="k">try</span><span class="p">:</span>
@@ -1774,15 +1803,18 @@
 
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;slice&quot;</span><span class="p">:</span>
             <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="n">keywords</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keywords</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">keywords</span>
+            <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="n">dims</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">dims</span>
             <span class="n">word_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">original_index_order</span> <span class="o">=</span> <span class="n">word_slice</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span>
-            <span class="k">if</span> <span class="n">dims</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">dims</span><span class="p">:</span>
                 <span class="n">dims</span> <span class="o">=</span> <span class="n">original_index_order</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-            <span class="n">word_slice</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">dims</span> <span class="o">==</span> <span class="n">original_index_order</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">dim_x</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dim_x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+                    <span class="n">word_slice</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">dim_x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word_slice</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
                 <span class="n">word_slice</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;TEMP_INDEX&#39;</span>
             <span class="n">keyword_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">word_slice</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
                     <span class="n">keyword_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
                     <span class="k">try</span><span class="p">:</span>
@@ -1795,14 +1827,19 @@
                     <span class="n">keyword_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">keyword_matrix</span><span class="p">,</span> <span class="n">keyword_result</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;TEMP_INDEX&#39;</span><span class="p">:</span>
-            <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">dims_return</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">original_index_order</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dims_return</span><span class="p">:</span>
+                <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims_return</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">dims_return</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">original_index_order</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dims_return</span><span class="p">:</span>
+                <span class="n">keyword_matrix</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">dims_return</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">append_to</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="p">,</span> <span class="n">keyword_matrix</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">slice</span> <span class="o">=</span> <span class="n">keyword_matrix</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reorder_dimensions</span><span class="p">(</span><span class="n">original_index_order</span><span class="p">,</span> <span class="s2">&quot;slice&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reorder_dimensions</span><span class="p">(</span><span class="n">original_index_order</span><span class="p">,</span> <span class="s2">&quot;slice&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span></div>
 
 <div class="viewcode-block" id="fpa.keyword_replace"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.keyword_replace">[docs]</a>    <span class="k">def</span> <span class="nf">keyword_replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_words</span><span class="p">,</span> <span class="n">replace_words</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data_obj</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">):</span>
@@ -1985,8 +2022,53 @@
             <span class="n">accounts_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">path_name</span> <span class="o">+</span> <span class="n">f_name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">accounts</span> <span class="o">=</span> <span class="n">accounts_df</span></div>
 
-<div class="viewcode-block" id="fpa.slice_to_project"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.slice_to_project">[docs]</a>    <span class="k">def</span> <span class="nf">slice_to_project</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span></div>
+<div class="viewcode-block" id="fpa.slice_to_project"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.slice_to_project">[docs]</a>    <span class="k">def</span> <span class="nf">slice_to_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prj_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the slice data object as a project as either a directory with pickle files or as a json object.</span>
+
+<span class="sd">        :param prj_name: String object for name of the project.  Will make a directory in path_name if it doesn&#39;t exist.</span>
+<span class="sd">        :param path_name: Path to directory or a full file path for json.  I.e. for json file</span>
+<span class="sd">         &#39;C:/Budgets/Budgets v1.json&#39; or &#39;C:/Budgets/&#39; for normal save</span>
+<span class="sd">        :return: nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path_name</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">path_name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;json&quot;</span><span class="p">:</span>
+            <span class="n">container</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;data_idx&quot;</span><span class="p">,</span> <span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="s2">&quot;accounts&quot;</span><span class="p">,</span> <span class="s2">&quot;accts_idx&quot;</span><span class="p">],</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Load&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;data_idx&quot;</span><span class="p">,</span> <span class="s2">&quot;Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+                <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+            <span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="s2">&quot;Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_block</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;accounts&quot;</span><span class="p">,</span> <span class="s2">&quot;Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;accts_idx&quot;</span><span class="p">,</span> <span class="s2">&quot;Load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span>
+                <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span>
+            <span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">path_name</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">path_name</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">path_name</span> <span class="o">=</span> <span class="n">path_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">path_name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+                    <span class="n">path_name</span> <span class="o">=</span> <span class="n">path_name</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
+            <span class="k">if</span> <span class="n">path_name</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">path_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+                <span class="n">path_name</span> <span class="o">=</span> <span class="n">path_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">prj_name</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">prj_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path_name</span> <span class="o">+</span> <span class="n">prj_name</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path_name</span> <span class="o">+</span> <span class="n">prj_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">path_name</span> <span class="o">+</span> <span class="n">prj_name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">prj_name</span> <span class="o">+</span> <span class="s2">&quot; - data.pkl&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_block</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span>
+                <span class="n">path_name</span> <span class="o">+</span> <span class="n">prj_name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">prj_name</span> <span class="o">+</span> <span class="s2">&quot; - meta_block.pkl&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">accounts</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span>
+                <span class="n">path_name</span> <span class="o">+</span> <span class="n">prj_name</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">prj_name</span> <span class="o">+</span> <span class="s2">&quot; - accounts.pkl&quot;</span>
+            <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="fpa.make_pivot_table"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.make_pivot_table">[docs]</a>    <span class="k">def</span> <span class="nf">make_pivot_table</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -2001,7 +2083,7 @@
         <span class="k">if</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
                 <span class="n">df</span><span class="p">,</span>
                 <span class="n">value_col</span><span class="p">,</span>
                 <span class="n">index_names</span><span class="p">,</span>
@@ -2010,12 +2092,12 @@
                 <span class="n">margins</span><span class="o">=</span><span class="n">totals</span><span class="p">,</span>
                 <span class="n">margins_name</span><span class="o">=</span><span class="n">total_names</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span>
 
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;slice&quot;</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
                 <span class="n">df</span><span class="p">,</span>
                 <span class="n">value_col</span><span class="p">,</span>
                 <span class="n">index_names</span><span class="p">,</span>
@@ -2024,12 +2106,12 @@
                 <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">margins_name</span><span class="o">=</span><span class="n">total_names</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span>
 
         <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;consolidation&quot;</span><span class="p">:</span>
             <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">consolidation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
                 <span class="n">df</span><span class="p">,</span>
                 <span class="n">value_col</span><span class="p">,</span>
                 <span class="n">index_names</span><span class="p">,</span>
@@ -2038,7 +2120,22 @@
                 <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">margins_name</span><span class="o">=</span><span class="n">total_names</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span>
+
+        <span class="k">elif</span> <span class="n">data_obj</span> <span class="o">==</span> <span class="s2">&quot;function_result&quot;</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_result</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+                <span class="n">df</span><span class="p">,</span>
+                <span class="n">value_col</span><span class="p">,</span>
+                <span class="n">index_names</span><span class="p">,</span>
+                <span class="n">col_names</span><span class="p">,</span>
+                <span class="n">aggfunc</span><span class="o">=</span><span class="n">function</span><span class="p">,</span>
+                <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">margins_name</span><span class="o">=</span><span class="n">total_names</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pivot</span></div>
+
 
 <div class="viewcode-block" id="fpa.variance_analysis"><a class="viewcode-back" href="../pyfpa.html#pyfpa.fpa.variance_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">variance_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim_name</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">dim2</span><span class="p">,</span> <span class="n">data_obj</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2063,7 +2160,7 @@
             <span class="n">df2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slice</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="n">dim2</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">dim_name</span><span class="p">)</span>
             <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s2">&quot;Data_Block&quot;</span><span class="p">)</span>
         <span class="n">amt_var</span> <span class="o">=</span> <span class="n">df1</span> <span class="o">-</span> <span class="n">df2</span>
-        <span class="n">pct_var</span> <span class="o">=</span> <span class="n">df1</span> <span class="o">/</span> <span class="n">df2</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">pct_var</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">amt_var</span><span class="p">,</span> <span class="n">pct_var</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">,</span> <span class="s2">&quot;Percent&quot;</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">variance</span></div>
 
