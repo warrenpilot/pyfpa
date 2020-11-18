@@ -4,7 +4,7 @@ Project for Financial Planning and Analysis
 Written by Erik Warren
 Original Date: October 2020
 Version Date: November 2020
-version: 0.0.6 beta
+version: 0.0.7 beta
 """
 
 
@@ -309,7 +309,7 @@ class fpa:
         if table_coords is None:
             for wsheet in wb_sheets:
                 self.import_xl(f_path, wsheet)
-                self.add_dimensions(["Work_Sheet"], [wsheet])
+                self.add_dimensions(["Work_Sheet"], [wsheet], 1, 'block')
                 self.add_block_to_data()
         else:
             for wsheet in wb_sheets:
@@ -371,7 +371,7 @@ class fpa:
             if table_coords is None:
                 for wsheet in wb_sheets:
                     self.import_xl(f_path, wsheet)
-                    self.add_dimensions(["Work_Sheet"], [wsheet])
+                    #self.add_dimensions(["Work_Sheet"], [wsheet], 1, 'block')
                     self.add_block_to_data()
             else:
                 for wsheet in wb_sheets:
@@ -1165,7 +1165,7 @@ class fpa:
         elif data_obj == "slice":
             self.slice.reset_index(dims, inplace=True)
         elif data_obj == "variance":
-            self.variance.index.reset_index(dims, inplace=True)
+            self.variance.reset_index(dims, inplace=True)
         elif data_obj == "consolidation":
             self.consolidation.reset_index(
                 dims, inplace=True
